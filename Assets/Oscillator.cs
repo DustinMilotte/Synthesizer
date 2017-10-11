@@ -7,16 +7,11 @@ public class Oscillator : MonoBehaviour {
 	public double frequency = 440.0;
 	public float gain;
 	public float volume;
-	public float noteLength;
 	public float[] frequencies;
 	public int thisFreq;
-	public bool ballHit;
 	public enum Waveform {sine, square};
 	public Waveform myWave;
 
-	private bool playingSound = false;
-	private bool readyToPlay = true;
-	private float timeSinceNoteStarted;
 	private double increment;
 	private double phase;
 	private double samplingFrequency = 48000.0;
@@ -36,34 +31,8 @@ public class Oscillator : MonoBehaviour {
 		frequencies [7] = 880;
 	}
 
-	void Update()
-	{
-		if (playingSound)
-		{
-			readyToPlay = false;
-			timeSinceNoteStarted += Time.deltaTime;
-		
-		}
-		if (timeSinceNoteStarted >= noteLength){
-			readyToPlay = true;
-			timeSinceNoteStarted = 0f;
-			StopSound();
-			playingSound = false;
-		}
-
-	}
-
-
 	public void PlaySound (int note)
 	{
-		
-//		if (readyToPlay){
-//			Debug.Log("PlaySound called. Note: " + note.ToString());
-//			gain = volume;
-//			frequency = frequencies [note];
-//			playingSound = true;
-//		}	
-
 		gain = volume;
 		frequency = frequencies [note];
 	}
@@ -71,9 +40,8 @@ public class Oscillator : MonoBehaviour {
 
 	public void StopSound(){
 		gain = 0f;
-		//thisFreq += 1;
-		//thisFreq = thisFreq % frequencies.Length;
 	}
+
 	void OnAudioFilterRead(float [] data, int channels)
 	{
 		increment = frequency * 2.0 * Mathf.PI / samplingFrequency;
