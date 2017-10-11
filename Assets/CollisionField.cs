@@ -13,15 +13,15 @@ public class CollisionField : MonoBehaviour {
 		if (col.gameObject.tag == "ball"){ 
 			ContactPoint contactPoint = col.contacts[0];
 			Debug.Log("Collision at: " + contactPoint.point);
-			if (contactPoint.point.y < .2) {
+			if (contactPoint.point.y < 1.2) {
 				myOsc.PlaySound (0);
-			} else if (contactPoint.point.y < .4) {
+			} else if (contactPoint.point.y < 1.4) {
 				myOsc.PlaySound (1);
-			} else if (contactPoint.point.y < .6) {
+			} else if (contactPoint.point.y < 1.6) {
 				myOsc.PlaySound (2);
-			} else if (contactPoint.point.y < .8) {
+			} else if (contactPoint.point.y < 1.8) {
 				myOsc.PlaySound (3);
-			} else if (contactPoint.point.y < 1) {
+			} else if (contactPoint.point.y < 2) {
 				myOsc.PlaySound (4);
 			} 
 		}
