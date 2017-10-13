@@ -6,15 +6,19 @@ public class CollisionField : MonoBehaviour {
 	private Oscillator myOsc;
 	private SynthControl mySynthControl;
 
-	// Use this for initialization
+	public GameObject RightControllerParticleSystem;
+	private ParticleSystem particles;
+
 	void Start () {
 		myOsc = GetComponent<Oscillator>();
 		mySynthControl = GetComponent<SynthControl>();
+		//RightControllerParticleSystem = GameObject.Find("RightControllerParticleSystem");
+		particles = RightControllerParticleSystem.GetComponent<ParticleSystem>();
 	}
 
 	void OnTriggerStay(Collider col){ 
 		Vector3 colPos = col.gameObject.transform.position;
-		Debug.Log("Collision at: " + colPos + "with " + col.gameObject.name);
+		Debug.Log("Collision with " + col.gameObject.name);
 		if (colPos.y < 1.2) {
 				myOsc.PlaySound (0);
 		} else if (colPos.y < 1.4) {
@@ -30,9 +34,14 @@ public class CollisionField : MonoBehaviour {
 		mySynthControl.SetVolume(Mathf.Lerp(-80f, 0f, colPos.z));
 		mySynthControl.SetCutoff(Mathf.Lerp(100f, 15000f, colPos.x));
 
+
+		particles.Play();
+
 	}
 
 	void OnTriggerExit(){
 		myOsc.StopSound();
+		particles.Stop();
+		Debug.Log("triggerexit");
 	}
 }

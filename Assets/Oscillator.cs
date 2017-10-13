@@ -21,11 +21,11 @@ public class Oscillator : MonoBehaviour {
 	void Start()
 	{
 		frequencies = new float[8];
-		frequencies [0] = 440;
-		frequencies [1] = 494;
-		frequencies [2] = 554;
-		frequencies [3] = 587;
-		frequencies [4] = 659;
+		frequencies [0] = 146.83f;
+		frequencies [1] = 174.61f;
+		frequencies [2] = 195.99f;
+		frequencies [3] = 220f;
+		frequencies [4] = 261.62f;
 		frequencies [5] = 740;
 		frequencies [6] = 831;
 		frequencies [7] = 880;
